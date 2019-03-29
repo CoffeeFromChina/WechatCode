@@ -1,0 +1,17 @@
+﻿*.class
+
+#eclipse产生的文件
+.classpath
+.project
+.settings
+
+#maven 产生的target文件夹
+target
+
+#包文件（项目生成的包）
+*.jar
+*.war
+*.ear
+
+#苹果系统下面文件
+*.DS_Store
