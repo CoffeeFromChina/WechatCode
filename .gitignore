@@ -1,4 +1,7 @@
 ﻿*.class
+*.cmd
+mvnw
+*.iml
 
 #eclipse产生的文件
 .classpath
