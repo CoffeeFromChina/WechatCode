@@ -9,18 +9,18 @@
 	</insert>
 
 	<delete id="delete" parameterType="Category">
-		delete from category_ where id= #{id}
+		delete from category where id= #{id}
 	</delete>
 
 	<select id="get" parameterType="_int" resultType="Category">
-		select * from category_ where id= #{id}
+		select * from category where id= #{id}
 	</select>
 
 	<update id="update" parameterType="Category">
-		update category_ set name=#{name} where id=#{id}
+		update category set name=#{name} where id=#{id}
 	</update>
 	<select id="list" resultType="Category">
-		select * from category_
+		select * from category
 	</select>
 </mapper>
 

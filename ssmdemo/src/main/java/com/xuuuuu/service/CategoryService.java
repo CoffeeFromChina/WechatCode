@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.xuuuuu.domain.Category;
 import com.xuuuuu.persistence.CategoryMapper;
 
-@Service
+@Service //标记这个类属于业务逻辑层
 public class CategoryService{
 	@Autowired
 	CategoryMapper categoryMapper;
