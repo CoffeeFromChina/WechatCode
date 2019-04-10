@@ -1,4 +1,6 @@
-﻿*.class
+﻿#IDEA产生文件
+.idea
+*.class
 *.cmd
 mvnw
 *.iml
