@@ -1,7 +1,4 @@
-# WechatCode
-公众号代码存放处====>公众号：Xuuuuu
-
-# 仓库目录
+# 仓库目录介绍
 ~~~
 WeCHatCode
 ├─aopdemo
@@ -25,3 +22,9 @@ WeCHatCode
 │               
 └─ssmdemo 基础SSM Demo
 ~~~
+
+
+
+## 如果我的文章对你有用就来一波关注吧
+
+![公众号二维码](https://mmbiz.qpic.cn/mmbiz_jpg/xCxowSvVWUb2GQnFNdABImqOn8eRC5GdkRc7OhxZMlJ0wgUEWWiaQicnN5EcbAoC1I6AfnTibUkIzSNp12EDkGksA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
