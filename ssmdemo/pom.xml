@@ -109,5 +109,15 @@
 		</dependency>
 	</dependencies>
 	<build>
+        <!-- 指定Mapper位置。 -->
+        <!-- 放在 java／main 中的Mapper会被忽略，所以需要指定Mapper位置。-->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>com/xuuuuu/persistence/*Mapper.xml</include>
+                </includes>
+            </resource>
+        </resources>
 	</build>
 </project>
