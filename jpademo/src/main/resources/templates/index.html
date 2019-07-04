@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table align='center' border='1' cellspacing='0'>
+    <tr>
+        <td>num</td>
+        <td>id</td>
+        <td>name</td>
+    </tr>
+    <tr th:each="obj, iterStat :${page.content}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${obj.id}"></td>
+        <td th:text="${obj.name}"></td>
+    </tr>
+</table>
+<div style="width: 18%; margin: 0 auto; padding: 0 auto">
+    <div>
+        当前<span th:text="${page.number+1}"/>页,
+        总<span th:text="${page.totalPages}"/>页,
+        总<span th:text="${page.totalElements}"/>条记录
+    </div>
+    <div>
+        <a th:href="@{/index(pageNo=0)}">第一页</a>
+        <span th:if="${page.number gt 0}">
+                <a th:href="@{/index(pageNo=${page.number-1})}">上一页</a>
+            </span>
+        <span th:if="${page.number lt page.totalPages-1}">
+                <a th:href="@{/index(pageNo=${page.number+1})}">下一页</a>
+            </span>
+        <a th:href="@{/index(pageNo=${page.totalPages-1})}">最后页</a>
+    </div>
+</div>
+</body>
+</html>
