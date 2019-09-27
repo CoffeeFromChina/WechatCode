@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 非自动生成文件 -->
+<mapper namespace="com.sptpc.mappers.SysurpMapper">
+    <!-- 得到用户的角色 -->
+    <select id="getRole" parameterType="String" resultType="com.sptpc.pojo.SysRole">
+		select
+		roleName from sys_role where roleName in (select roleName from sys_ur
+		where userName=#{rdID})
+	</select>
+
+    <!-- 得到用户的权限 -->
+    <select id="getPermission" parameterType="String" resultType="com.sptpc.pojo.SysPermission">
+		select perName from sys_permission where perName in (select perName from
+		sys_rp where roleName=#{roleName})
+	</select>
+</mapper>

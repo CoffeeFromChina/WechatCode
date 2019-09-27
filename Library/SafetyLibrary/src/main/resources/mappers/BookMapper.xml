@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sptpc.mappers.BookMapper">
+    <resultMap id="BaseResultMap" type="com.sptpc.pojo.Book">
+        <constructor>
+            <idArg column="bkID" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkCode" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkAuthor" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkPress" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkDatePress" jdbcType="DATE" javaType="java.util.Date"/>
+            <arg column="bkISBN" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkCatalog" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkLanguage" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkPages" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="bkPrice" jdbcType="REAL" javaType="java.lang.Float"/>
+            <arg column="bkDateIn" jdbcType="DATE" javaType="java.util.Date"/>
+            <arg column="bkBrief" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkCover" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkStatus" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    bkID, bkCode, bkName, bkAuthor, bkPress, bkDatePress, bkISBN, bkCatalog, bkLanguage, 
+    bkPages, bkPrice, bkDateIn, bkBrief, bkCover, bkStatus
+  </sql>
+
+    <!-- 保存图书 -->
+    <insert id="insertBook" parameterType="com.sptpc.pojo.Book">
+		insert into tb_book
+		values(#{bkID},#{bkCode},#{bkName},#{bkAuthor},#{bkPress},#{bkDatePress},#{bkISBN},
+		#{bkCatalog},#{bkLanguage},#{bkPages},#{bkPrice},#{bkDateIn},#{bkBrief},#{bkCover},#{bkStatus})
+	</insert>
+
+    <!-- 分页查询，记录显示 -->
+    <select id="selectBook" parameterType="com.sptpc.pojo.Parameter" resultMap="BaseResultMap">
+        select * from tb_book
+        <if test="bkID!=null and bkID!=''">
+            where bkID=#{bkID}
+        </if>
+        <if test="bkName!=null and bkName!=''">
+            where bkName like '%${bkName}%'
+        </if>
+        <if test="bkStatus!=null and bkStatus!=''">
+            where bkStatus=#{bkStatus}
+        </if>
+        <if test="start!=-1 and end!=-1">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteBookByID" parameterType="String">
+		delete from tb_book
+		where bkID=#{bkID}
+	</delete>
+
+    <!-- 更新操作 -->
+    <update id="updateBookByID" parameterType="com.sptpc.pojo.Book">
+		update tb_book set
+		bkCode=#{bkCode},bkName=#{bkName},bkAuthor=#{bkAuthor},bkPress=#{bkPress},bkDatePress=#{bkDatePress},bkISBN=#{bkISBN},
+		bkCatalog=#{bkCatalog},bkLanguage=#{bkLanguage},bkPages=#{bkPages},bkPrice=#{bkPrice},bkDateIn=#{bkDateIn},bkBrief=#{bkBrief},bkCover=#{bkCover},bkStatus=#{bkStatus}
+		where bkID=#{bkID}
+	</update>
+
+    <!-- 总记录的个数或者查询的记录 -->
+    <select id="getCounts" parameterType="com.sptpc.pojo.Parameter" resultType="int">
+        select count(*) from tb_book
+        <if test="bkID!=null and bkID!=''">
+            where bkID=#{bkID}
+        </if>
+        <if test="bkName!=null and bkName!=''">
+            where bkName like '%${bkName}%'
+        </if>
+    </select>
+</mapper>

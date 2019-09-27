@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sptpc.mappers.BookClassMapper">
+    <resultMap id="BaseResultMap" type="com.sptpc.pojo.BookClass">
+        <constructor>
+            <idArg column="bkCatalog" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bkClassName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    bkCatalog, bkClassName
+  </sql>
+
+    <!-- 插入图书编目的数据 -->
+    <insert id="insertBookClass" parameterType="com.sptpc.pojo.BookClass">
+		insert into
+		tb_bookclass
+		values(#{bkCatalog},#{bkClassName})
+	</insert>
+
+    <!-- 删除 -->
+    <delete id="deleteBookClassByID" parameterType="com.sptpc.pojo.BookClass">
+		delete from
+		tb_bookclass where bkCatalog=#{bkCatalog}
+	</delete>
+
+    <!-- 更新 -->
+    <update id="updateBookClass" parameterType="com.sptpc.pojo.BookClass">
+		update
+		tb_bookclass
+		set bkClassName=#{bkClassName}
+		where
+		bkCatalog=#{bkCatalog}
+	</update>
+
+    <!-- 分页查询 -->
+    <select id="selectBookClassByID" parameterType="com.sptpc.pojo.Parameter"
+            resultType="BookClass">
+        select * from tb_bookclass
+        <if test="rdID!=null and rdID!=''">
+            where bkCatalog=#{rdID}
+        </if>
+        <if test="start!=-1 and end!=-1">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+    <!--总记录-->
+    <select id="getCount" parameterType="com.sptpc.pojo.Parameter" resultType="int">
+        select count(*) from tb_bookclass
+        <if test="rdID!=null and rdID!=''">
+            where bkCatalog=#{rdID}
+        </if>
+    </select>
+
+    <!-- 查找 -->
+    <select id="findBookClassByID" parameterType="Parameter" resultType="com.sptpc.pojo.BookClass">
+		select bkCatalog,bkClassName from tb_bookclass where bkCatalog=#{rdID}
+	</select>
+
+    <!-- 查找所有的分类号 -->
+    <select id="selectAllBkCatalog" resultType="com.sptpc.pojo.BookClass">
+		select * from tb_bookclass
+	</select>
+
+</mapper>

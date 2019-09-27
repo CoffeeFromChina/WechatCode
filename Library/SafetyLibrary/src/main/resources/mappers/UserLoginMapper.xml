@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 非自动生成文件 -->
+<mapper namespace="com.sptpc.mappers.UserLoginMapper">
+    <cache></cache>
+    <!-- 根据name查找密码 -->
+    <select id="findpwdByName" parameterType="String" resultType="String">
+		select password from sys_user where name=#{name}
+	</select>
+
+    <!-- 修改密码 -->
+    <update id="updatepwdByName" parameterType="com.sptpc.pojo.SysUser">
+		update tb_reader set rdPwd=#{password} where rdID=#{username}
+	</update>
+
+    <!-- 修改密码 -->
+    <update id="updatePwd" parameterType="com.sptpc.pojo.SysUser">
+		update sys_user set password=#{password} where name=#{username}
+	</update>
+
+    <!-- 读者信息创建时并在系统表中创建用户 -->
+    <insert id="insertSysUser" parameterType="com.sptpc.pojo.Reader">
+		insert into sys_user(name,password,date,photo)
+		values(#{rdID},#{rdPwd},#{rdDateReg},#{rdPhoto})
+	</insert>
+
+    <!-- 更新 -->
+    <update id="updateSysUser" parameterType="com.sptpc.pojo.Reader">
+		update sys_user
+		set
+		password=#{rdPwd},
+		photo=#{rdPhoto}
+		where name=#{rdID}
+	</update>
+
+    <!-- 删除 -->
+    <delete id="deleteSysUser" parameterType="String">
+		delete from sys_user where name=#{rdID}
+	</delete>
+
+    <!-- 查询 -->
+    <select id="selectSysUser" parameterType="String" resultType="com.sptpc.pojo.Reader">
+		select * from tb_reader where rdID=#{id}
+	</select>
+
+    <!-- 权限设置 -->
+    <insert id="insertPermission" parameterType="com.sptpc.pojo.SysUR">
+		insert into sys_ur(userName,roleName) select #{userName},#{roleName} from DUAL where EXISTS( select name from sys_user where name=#{userName})
+	</insert>
+
+    <!-- selectPermission -->
+    <select id="selectPermission" parameterType="com.sptpc.pojo.Parameter" resultType="SysUR">
+        select * from sys_ur
+        <if test="start!=-1 and end !=-1">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+    <!-- getCount -->
+    <select id="getCountsPermission" resultType="int">
+		select count(*) from sys_ur
+	</select>
+
+    <!-- deletePermission -->
+    <delete id="deletePermission" parameterType="com.sptpc.pojo.SysUR">
+        delete from sys_ur
+        <where>
+            <if test="id!= -1">
+                id=#{id}
+            </if>
+            <if test="userName != null and userName!=''">
+                AND userName=#{userName}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                AND roleName=#{roleName}
+            </if>
+        </where>
+    </delete>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sptpc.mappers.SysRPMapper">
+    <resultMap id="BaseResultMap" type="com.sptpc.pojo.SysRP">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="roleName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="perName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, roleName, perName
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_rp
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_rp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.sptpc.pojo.SysRP">
+    insert into sys_rp (id, roleName, perName
+      )
+    values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{pername,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.sptpc.pojo.SysRP">
+        insert into sys_rp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="rolename != null">
+                roleName,
+            </if>
+            <if test="pername != null">
+                perName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="rolename != null">
+                #{rolename,jdbcType=VARCHAR},
+            </if>
+            <if test="pername != null">
+                #{pername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sptpc.pojo.SysRP">
+        update sys_rp
+        <set>
+            <if test="rolename != null">
+                roleName = #{rolename,jdbcType=VARCHAR},
+            </if>
+            <if test="pername != null">
+                perName = #{pername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sptpc.pojo.SysRP">
+    update sys_rp
+    set roleName = #{rolename,jdbcType=VARCHAR},
+      perName = #{pername,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
