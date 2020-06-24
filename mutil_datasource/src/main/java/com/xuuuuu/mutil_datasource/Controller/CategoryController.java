@@ -23,9 +23,6 @@ public class CategoryController {
 	public String index(Model model){
 		List<Category> userList = dbService.getAllCategory();   //获取所有用户信息
 		List<Price> priceList = dbService.getAllPrice();        //获取所有价格信息
-		Map<String, List> map = new HashMap<String, List>();
-		map.put("Category", userList);
-		map.put("Price", priceList);
 
 		model.addAttribute("userList", userList);
 		model.addAttribute("priceList", priceList);
