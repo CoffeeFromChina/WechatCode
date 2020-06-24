@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuuuuu.mutil_datasource.dao2.PriceDao">
+    <resultMap id="BaseResultMap" type="com.xuuuuu.mutil_datasource.pojo.Price">
+        <constructor>
+            <idArg column="RMB" jdbcType="VARCHAR" javaType="java.lang.Integer"/>
+        </constructor>
+    </resultMap>
+    <select id="getAll" resultType="com.xuuuuu.mutil_datasource.pojo.Price">
+        select * from Price
+    </select>
+</mapper>

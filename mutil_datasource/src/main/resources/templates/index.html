@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table align='center' border='1' cellspacing='0'>
+    <tr>
+        <td>Num</td>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Price</td>
+    </tr>
+    <!-- 双列表遍历-->
+    <tr th:each="obj, iterStat :${userList}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${obj.id}"></td>
+        <td th:text="${obj.name}"></td>
+        <td th:text="${priceList[iterStat.index].RMB}"></td>
+    </tr>
+</table>
+</body>
+</html>
