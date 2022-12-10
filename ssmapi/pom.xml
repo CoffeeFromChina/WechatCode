@@ -9,7 +9,7 @@
 	<name>ssmapi Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<spring.version>4.3.8.RELEASE</spring.version>
+		<spring.version>6.0.0</spring.version>
 		<aspectj.version>1.8.0</aspectj.version>
 	</properties>
 	<dependencies>
